@@ -1,5 +1,26 @@
 {
   "$schema": "http://json-schema.org/schema",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "outputFile": {
+      "description": "File where version information will be created",
+      "type": "string",
+      "default": "src/assets/version.json"
+    },
+    "fields": {
+      "description": "Array of fields which will be included",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["version", "date", "author", "git"]
+      },
+      "default": ["version", "date", "author", "git"]
+    },
+    "lint": {
+      "description": "Linter which will be disabled inside generated file",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    }
+  }
 }

@@ -15,12 +15,9 @@
         "semi": "off",
         "@typescript-eslint/semi": "warn",
         "quotes": "off",
-        "@typescript-eslint/quotes": [
-          "warn",
-          "single"
-        ],
+        "@typescript-eslint/quotes": ["warn", "single"],
         "comma-dangle": "off",
-        "@typescript-eslint/comma-dangle": ["warn", "always"]
+        "@typescript-eslint/comma-dangle": ["warn", "always-multiline"]
       }
     }
   ]
