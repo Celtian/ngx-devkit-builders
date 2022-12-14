@@ -1,14 +1,49 @@
 {
   "name": "ngx-devkit",
   "version": "0.0.0",
+  "author": {
+    "name": "Dominik Hladík",
+    "email": "dominik.hladik@seznam.cz",
+    "url": "https://github.com/Celtian"
+  },
+  "private": false,
+  "license": "MIT",
   "description": "Custom Angular builders",
   "builders": "builders.json",
   "scripts": {
     "build": "rimraf dist && tsc",
     "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist",
     "build:watch": "tsc-watch --onSuccess 'yarn postbuild'",
-    "prepare": "husky install"
+    "publish:npmjs": "yarn build && npm publish --folder dist",
+    "gpr:setup": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/gpr-setup",
+    "prepare": "husky install",
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "postversion": "git push && git push --follow-tags",
+    "publish:beta": "yarn && yarn build && npm publish --folder dist --tag beta",
+    "release:beta": "npm version prerelease -m \"chore(update): prelease %s β\"",
+    "release:patch": "git checkout master && npm version patch -m \"chore(update): patch release %s 🐛 \"",
+    "release:minor": "git checkout master && npm version minor -m \"chore(update): release %s 🚀\"",
+    "release:major": "git checkout master && npm version major -m \"chore(update): major release %s 💥 \""
   },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.1500.3",
+    "@angular-devkit/core": "^15.0.3",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@types/node": "^16.18.8",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "auto-changelog": "^2.4.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.29.0",
+    "husky": "^8.0.2",
+    "prettier": "^2.8.1",
+    "pretty-quick": "^3.1.3",
+    "rimraf": "^3.0.2",
+    "tsc-watch": "^6.0.0",
+    "typescript": "^4.9.4"
+  },
+  "homepage": "https://github.com/Celtian/ngx-devkit#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Celtian/ngx-devkit.git"
@@ -19,34 +54,13 @@
     "builder",
     "devkit"
   ],
-  "author": {
-    "name": "Dominik Hladík",
-    "email": "dominik.hladik@seznam.cz",
-    "url": "https://github.com/Celtian"
-  },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Celtian/ngx-devkit/issues"
   },
-  "homepage": "https://github.com/Celtian/ngx-devkit#readme",
-  "devDependencies": {
-    "@angular-devkit/architect": "^0.1500.3",
-    "@angular-devkit/core": "^15.0.3",
-    "@commitlint/cli": "^17.3.0",
-    "@commitlint/config-conventional": "^17.3.0",
-    "@types/node": "^16.18.8",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
-    "copyfiles": "^2.4.1",
-    "eslint": "^8.29.0",
-    "husky": "^8.0.2",
-    "prettier": "^2.8.1",
-    "pretty-quick": "^3.1.3",
-    "rimraf": "^3.0.2",
-    "tsc-watch": "^6.0.0",
-    "typescript": "^4.9.4"
-  },
   "engines": {
     "node": ">=16 <18"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

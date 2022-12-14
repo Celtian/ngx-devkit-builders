@@ -5,7 +5,7 @@
     "outputFile": {
       "description": "File where version information will be created",
       "type": "string",
-      "default": "src/assets/version.json"
+      "default": "src/environments/version.ts"
     },
     "fields": {
       "description": "Array of fields which will be included",

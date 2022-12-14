@@ -13,11 +13,46 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
+> ✓ _Angular 15 compatible_
+
 ## Builders
 
 | Name    | Description                   |
 | ------- | ----------------------------- |
 | version | Create build information file |
+
+_More builders can be added in the future._
+
+## Quick start
+
+1. Go to angular.json
+
+```json
+{
+  ...,
+  "projects": {
+    "your-project-name": {
+      ...,
+      "architect": {
+        ...,
+        "version": { // name can be different if you want
+          "builder": "ngx-devkit:version",
+          "options": { // not needed
+            "outputFile": "src/environments/version.ts", // or src/assets/version.json
+            "fields": ["version", "date", "author", "git"], // or custom selection
+            "lint": "eslint" // or "tslint"
+          }
+        }
+      }
+  }
+}
+```
+
+2. Run command
+
+```
+ng run your-project-name:version
+```
 
 ## License
 
