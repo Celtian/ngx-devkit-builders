@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "version": {
+      "description": "It adds build information into the app",
+      "implementation": "./dist/version",
+      "schema": "./dist/version/schema.json"
+    }
+  }
+}
