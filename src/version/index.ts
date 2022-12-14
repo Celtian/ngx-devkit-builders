@@ -10,16 +10,15 @@ export default createBuilder((options, ctx) => {
 
     writeFileSync(fileToPatch, JSON.stringify({
       version: JSON.parse(packageJsonContent).version,
-      date: new Date().toISOString()
-    }))
+      date: new Date().toISOString(),
+    }));
 
   } catch (error) {
     return {
-      success: false
-    }
+      success: false,
+    };
   }
-
   return {
-    success: true
-  }
-})
+    success: true,
+  };
+});
