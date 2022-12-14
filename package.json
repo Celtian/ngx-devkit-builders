@@ -1,0 +1,39 @@
+{
+  "name": "ngx-devkit",
+  "version": "0.0.0",
+  "description": "Custom Angular builders",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Celtian/ngx-devkit.git"
+  },
+  "keywords": [
+    "angular",
+    "ngx",
+    "builder",
+    "devkit"
+  ],
+  "author": {
+    "name": "Dominik Hladík",
+    "email": "dominik.hladik@seznam.cz",
+    "url": "https://github.com/Celtian"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Celtian/ngx-devkit/issues"
+  },
+  "homepage": "https://github.com/Celtian/ngx-devkit#readme",
+  "engines": {
+    "node": ">=16 <18"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "husky": "^8.0.2",
+    "prettier": "^2.8.1",
+    "pretty-quick": "^3.1.3"
+  }
+}
