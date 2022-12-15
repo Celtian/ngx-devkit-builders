@@ -31,7 +31,7 @@ _More builders can be added in the future._
 {
   ...,
   "projects": {
-    "your-project-name": {
+    "your-project-name": { // project will be different
       ...,
       "architect": {
         ...,
