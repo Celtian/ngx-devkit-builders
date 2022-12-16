@@ -19,6 +19,7 @@
     "gpr:setup": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/gpr-setup",
     "prepare": "husky install",
     "version": "auto-changelog -p && git add CHANGELOG.md",
+    "preinstall": "npx only-allow yarn",
     "postversion": "git push && git push --follow-tags",
     "publish:beta": "yarn && yarn build && npm publish --folder dist --tag beta",
     "release:beta": "npm version prerelease -m \"chore(update): prelease %s β\"",
