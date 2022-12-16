@@ -17,6 +17,11 @@ const pkg: Record<string, any> = packageJson;
 
 pkg.scripts = {};
 pkg.devDependencies = {};
+pkg.engines.node = '>=12';
+pkg.peerDependencies = {
+  '@angular/core': '>=12',
+  '@angular/cli': '>=12'
+};
 
 writeFileSync(join(__dirname, '..', 'dist', 'package.json'), JSON.stringify(pkg, null, 2));
 console.log('File package.json modified:', pkg);
