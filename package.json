@@ -12,9 +12,10 @@
   "builders": "builders.json",
   "scripts": {
     "build": "rimraf dist && tsc",
-    "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist",
+    "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist && copyfiles ./package.json ./builders.json ./README.md ./LICENSE ./dist && yarn prepare-dist",
     "build:watch": "tsc-watch --onSuccess 'yarn postbuild'",
     "publish:npmjs": "yarn build && npm publish --folder dist",
+    "prepare-dist": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/prepare-dist",
     "gpr:setup": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/gpr-setup",
     "prepare": "husky install",
     "version": "auto-changelog -p && git add CHANGELOG.md",
@@ -25,9 +26,11 @@
     "release:minor": "git checkout master && npm version minor -m \"chore(update): release %s 🚀\"",
     "release:major": "git checkout master && npm version major -m \"chore(update): major release %s 💥 \""
   },
-  "devDependencies": {
+  "dependencies": {
     "@angular-devkit/architect": "^0.1500.3",
-    "@angular-devkit/core": "^15.0.3",
+    "@angular-devkit/core": "^15.0.3"
+  },
+  "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@types/node": "^16.18.8",
