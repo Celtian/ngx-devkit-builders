@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies # Install all deps
         run: yarn
 
-      - name: Build ngx-devkit # Build
+      - name: Build ngx-devkit-builders # Build
         run: yarn build
 
       - name: Publish NPM

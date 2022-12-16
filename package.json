@@ -1,5 +1,5 @@
 {
-  "name": "ngx-devkit",
+  "name": "ngx-devkit-builders",
   "version": "0.0.0",
   "author": {
     "name": "Dominik Hladík",
@@ -46,10 +46,10 @@
     "tsc-watch": "^6.0.0",
     "typescript": "^4.9.4"
   },
-  "homepage": "https://github.com/Celtian/ngx-devkit#readme",
+  "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Celtian/ngx-devkit.git"
+    "url": "git+https://github.com/Celtian/ngx-devkit-builders.git"
   },
   "keywords": [
     "angular",
@@ -58,7 +58,7 @@
     "devkit"
   ],
   "bugs": {
-    "url": "https://github.com/Celtian/ngx-devkit/issues"
+    "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
     "node": ">=16 <18"
