@@ -42,7 +42,7 @@ _More builders can be added in the future._
             "fields": ["version", "date", "author", "git"], // or custom selection
             "lint": "eslint", // or "tslint"
             "variable": "VERSION", // or whatever you want
-            "verbose": false
+            "verbose": false // or true
           }
         }
       }
