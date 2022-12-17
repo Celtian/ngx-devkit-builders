@@ -9,14 +9,17 @@ export interface VersionBuilderOptions extends JsonObject {
   outputFile: string;
   fields: VersionField[];
   lint: VersionLint;
+  variable: string;
 }
 
-export default createBuilder(({ outputFile, fields, lint }: VersionBuilderOptions, ctx) => {
-  ctx.logger.info('Creating version information file');
+export default createBuilder(({ outputFile, fields, lint, variable }: VersionBuilderOptions, ctx) => {
+  ctx.logger.info('🚧 Creating version information file…');
+  let targetFile = '';
   try {
     const rootPath = getSystemPath(normalize(ctx.workspaceRoot));
     const encoding: BufferEncoding = 'utf-8';
     const fileToPatch = `${rootPath}/${outputFile}`;
+    targetFile = fileToPatch;
     const packageJsonContent = readFileSync(`${rootPath}/package.json`, encoding);
     let head = readFileSync(`${rootPath}/.git/HEAD`, encoding).toString().trim();
     if (head.split(':').length > 1) {
@@ -46,7 +49,7 @@ export default createBuilder(({ outputFile, fields, lint }: VersionBuilderOption
         fileToPatch,
         `// IMPORTANT: THIS FILE IS AUTO GENERATED!
 /* ${lint === 'tslint' ? 'tslint:disable' : 'eslint-disable'} */
-export const VERSION = ${json};
+export const ${variable} = ${json};
 /* ${lint === 'tslint' ? 'tslint:enable' : 'eslint-enable'} */
 `,
         { encoding: 'utf-8' }
@@ -55,10 +58,13 @@ export const VERSION = ${json};
       writeFileSync(fileToPatch, json, { encoding });
     }
   } catch (error) {
+    ctx.logger.info('❌  Creating version information file failed');
+    ctx.logger.error(error);
     return {
       success: false
     };
   }
+  ctx.logger.info(`✔️  Version information file successfully created in ${targetFile}`);
   return {
     success: true
   };

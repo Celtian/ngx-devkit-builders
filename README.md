@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/Celtian/ngx-devkit-builders" target="blank"><img src="assets/logo.svg?sanitize=true" alt="" width="120"></a>
-  <h1 align="center">NgxDevkit</h1>
+  <h1 align="center">NgxDevkitBuilders</h1>
 </p>
 
 [![npm version](https://badge.fury.io/js/ngx-devkit-builders.svg)](https://badge.fury.io/js/ngx-devkit-builders)
@@ -40,7 +40,8 @@ _More builders can be added in the future._
           "options": { // not needed
             "outputFile": "src/environments/version.ts", // or src/assets/version.json
             "fields": ["version", "date", "author", "git"], // or custom selection
-            "lint": "eslint" // or "tslint"
+            "lint": "eslint", // or "tslint"
+            "variable": "VERSION" // or whatever you want
           }
         }
       }

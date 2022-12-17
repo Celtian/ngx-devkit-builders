@@ -21,6 +21,11 @@
       "type": "string",
       "enum": ["eslint", "tslint"],
       "default": "eslint"
+    },
+    "variable": {
+      "description": "Variable name which will be used inside generated file",
+      "type": "string",
+      "default": "VERSION"
     }
   }
 }
