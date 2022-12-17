@@ -58,8 +58,8 @@ export const ${variable} = ${json};
       writeFileSync(fileToPatch, json, { encoding });
     }
   } catch (error) {
-    ctx.logger.info('❌  Creating version information file failed');
-    ctx.logger.error(error);
+    ctx.logger.info('❌ Creating version information file failed');
+    ctx.logger.error(JSON.stringify(error, null, 2));
     return {
       success: false
     };
