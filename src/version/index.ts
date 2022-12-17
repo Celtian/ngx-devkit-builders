@@ -1,6 +1,6 @@
 import { createBuilder } from '@angular-devkit/architect';
 import { getSystemPath, JsonObject, normalize } from '@angular-devkit/core';
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 export type VersionField = 'version' | 'date' | 'author' | 'git';
 export type VersionLint = 'eslint' | 'tslint';
@@ -10,40 +10,81 @@ export interface VersionBuilderOptions extends JsonObject {
   fields: VersionField[];
   lint: VersionLint;
   variable: string;
+  verbose: boolean;
 }
 
-export default createBuilder(({ outputFile, fields, lint, variable }: VersionBuilderOptions, ctx) => {
+export interface VersionBuilderOutput {
+  version?: string;
+  date?: string;
+  author?: any;
+  git?: any;
+}
+
+export default createBuilder(({ outputFile, fields, lint, variable, verbose }: VersionBuilderOptions, ctx) => {
   ctx.logger.info('🚧 Creating version information file…');
   let targetFile = '';
+  const generalError = '❌ Creating version information file failed';
+
   try {
+    const result: VersionBuilderOutput = {};
+
     const rootPath = getSystemPath(normalize(ctx.workspaceRoot));
     const encoding: BufferEncoding = 'utf-8';
+    if (verbose === true) ctx.logger.info(`Encoding for read/write is ${encoding}`);
     const fileToPatch = `${rootPath}/${outputFile}`;
+    if (verbose === true) ctx.logger.info(`Output file is ${fileToPatch}`);
     targetFile = fileToPatch;
-    const packageJsonContent = readFileSync(`${rootPath}/package.json`, encoding);
-    let head = readFileSync(`${rootPath}/.git/HEAD`, encoding).toString().trim();
-    if (head.split(':').length > 1) {
-      head = head.split(':')[1].trim();
-    }
-    const commit = head ? readFileSync(`${rootPath}/.git/${head}`, encoding).toString().trim() : undefined;
-    const branch = head?.split('/')?.pop();
-    const packageJson = JSON.parse(packageJsonContent);
-    const git = branch || commit ? { branch, commit } : undefined;
+    const packageJson = JSON.parse(readFileSync(`${rootPath}/package.json`, encoding));
 
-    const json = JSON.stringify(
-      {
-        version: fields.includes('version') ? packageJson.version : undefined,
-        date: fields.includes('date') ? new Date().toISOString() : undefined,
-        author: fields.includes('author') ? packageJson.author : undefined,
-        git: fields.includes('git') ? git : undefined
-      },
-      null,
-      2
-    );
+    if (fields.includes('version')) {
+      result.version = packageJson.version;
+    }
+
+    if (fields.includes('date')) {
+      result.date = new Date().toISOString();
+    }
+
+    if (fields.includes('author')) {
+      result.author = packageJson.author;
+    }
+
+    if (fields.includes('git')) {
+      const headFile = `${rootPath}/.git/HEAD`;
+      if (verbose === true) ctx.logger.info(`Head is ${headFile}`);
+      if (!existsSync(headFile)) {
+        ctx.logger.info(generalError);
+        ctx.logger.error(`${headFile} was not found`);
+        return {
+          success: false
+        };
+      }
+      let head = readFileSync(headFile, encoding).toString().trim();
+      if (head.split(':').length > 1) {
+        head = head.split(':')[1].trim();
+      }
+      if (verbose === true) ctx.logger.info(`Head is ${head}`);
+      const refFile = `${rootPath}/.git/${head}`;
+      if (verbose === true) ctx.logger.info(`Last commit is located here ${refFile}`);
+      if (!existsSync(refFile)) {
+        ctx.logger.info(generalError);
+        ctx.logger.error(`${refFile} was not found`);
+        return {
+          success: false
+        };
+      }
+      const commit = head ? readFileSync(refFile, encoding).toString().trim() : undefined;
+      if (verbose === true) ctx.logger.info(`Commit is ${commit}`);
+      const branch = head?.split('/')?.pop();
+      if (verbose === true) ctx.logger.info(`Branch is ${branch}`);
+      const git = branch || commit ? { branch, commit } : undefined;
+      result.git = git;
+    }
+
+    const json = JSON.stringify(result, null, 2);
 
     const rawFormat = outputFile?.split('.')?.pop();
     const format = ['json', 'ts'].includes(rawFormat) ? rawFormat : 'json';
-
+    if (verbose === true) ctx.logger.info(`Output format is: ${format}`);
     if (format === 'ts') {
       writeFileSync(
         fileToPatch,
@@ -52,13 +93,13 @@ export default createBuilder(({ outputFile, fields, lint, variable }: VersionBui
 export const ${variable} = ${json};
 /* ${lint === 'tslint' ? 'tslint:enable' : 'eslint-enable'} */
 `,
-        { encoding: 'utf-8' }
+        { encoding }
       );
     } else {
       writeFileSync(fileToPatch, json, { encoding });
     }
   } catch (error) {
-    ctx.logger.info('❌ Creating version information file failed');
+    ctx.logger.info(generalError);
     ctx.logger.error(JSON.stringify(error, null, 2));
     return {
       success: false
