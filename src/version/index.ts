@@ -58,26 +58,24 @@ export default createBuilder(({ outputFile, fields, lint, variable, verbose }: V
           success: false
         };
       }
-      let head = readFileSync(headFile, encoding).toString().trim();
-      if (head.split(':').length > 1) {
-        head = head.split(':')[1].trim();
+      let commit = readFileSync(headFile).toString().trim();
+      let branch = '';
+      if (commit.indexOf(':') !== -1) {
+        branch = commit.substring(5);
+        const refFile = `${rootPath}/.git/${commit.substring(5)}`;
+        if (verbose === true) ctx.logger.info(`Last commit is located here ${refFile}`);
+        if (!existsSync(refFile)) {
+          ctx.logger.info(generalError);
+          ctx.logger.error(`${refFile} was not found`);
+          return {
+            success: false
+          };
+        }
+        commit = readFileSync(refFile).toString().trim();
+      } else {
+        branch = commit;
       }
-      if (verbose === true) ctx.logger.info(`Head is ${head}`);
-      const refFile = `${rootPath}/.git/${head}`;
-      if (verbose === true) ctx.logger.info(`Last commit is located here ${refFile}`);
-      if (!existsSync(refFile)) {
-        ctx.logger.info(generalError);
-        ctx.logger.error(`${refFile} was not found`);
-        return {
-          success: false
-        };
-      }
-      const commit = head ? readFileSync(refFile, encoding).toString().trim() : undefined;
-      if (verbose === true) ctx.logger.info(`Commit is ${commit}`);
-      const branch = head?.split('/')?.pop();
-      if (verbose === true) ctx.logger.info(`Branch is ${branch}`);
-      const git = branch || commit ? { branch, commit } : undefined;
-      result.git = git;
+      result.git = branch || commit ? { branch: branch.replace(/^refs\/heads\//, ''), commit } : undefined;
     }
 
     const json = JSON.stringify(result, null, 2);
