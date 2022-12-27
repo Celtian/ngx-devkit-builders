@@ -33,10 +33,10 @@ jobs:
             ${{ runner.OS }}-yarn-
             ${{ runner.OS }}-
 
-      - name: Install dependencies # Install all deps
+      - name: Install dependencies
         run: yarn
 
-      - name: Build ngx-devkit-builders # Build
+      - name: Build
         run: yarn build
 
       - name: Publish NPM
