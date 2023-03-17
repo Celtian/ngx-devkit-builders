@@ -58,7 +58,7 @@ ng run your-project-name:version
 
 ## License
 
-Copyright &copy; 2022 [Dominik Hladik](https://github.com/Celtian)
+Copyright &copy; 2022 - 2023 [Dominik Hladik](https://github.com/Celtian)
 
 All contents are licensed under the [MIT license].
 
