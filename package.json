@@ -28,24 +28,24 @@
     "release:major": "git checkout master && npm version major -m \"chore(update): major release %s 💥 \""
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1500.4",
-    "@angular-devkit/core": "^15.0.4"
+    "@angular-devkit/architect": "^0.1502.4",
+    "@angular-devkit/core": "^15.2.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.3.0",
-    "@commitlint/config-conventional": "^17.3.0",
-    "@types/node": "^16.18.8",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
     "auto-changelog": "^2.4.0",
     "copyfiles": "^2.4.1",
-    "eslint": "^8.30.0",
-    "husky": "^8.0.2",
-    "prettier": "^2.8.1",
+    "eslint": "^8.36.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.4.0",
     "tsc-watch": "^6.0.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",
   "repository": {
@@ -62,7 +62,7 @@
     "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
-    "node": ">=16 <18"
+    "node": ">=18 <20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
