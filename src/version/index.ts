@@ -16,8 +16,8 @@ export interface VersionBuilderOptions extends JsonObject {
 export interface VersionBuilderOutput {
   version?: string;
   date?: string;
-  author?: any;
-  git?: any;
+  author?: unknown;
+  git?: unknown;
 }
 
 export default createBuilder(({ outputFile, fields, lint, variable, verbose }: VersionBuilderOptions, ctx) => {
@@ -55,7 +55,7 @@ export default createBuilder(({ outputFile, fields, lint, variable, verbose }: V
         ctx.logger.info(generalError);
         ctx.logger.error(`${headFile} was not found`);
         return {
-          success: false
+          success: false,
         };
       }
       let commit = readFileSync(headFile).toString().trim();
@@ -68,7 +68,7 @@ export default createBuilder(({ outputFile, fields, lint, variable, verbose }: V
           ctx.logger.info(generalError);
           ctx.logger.error(`${refFile} was not found`);
           return {
-            success: false
+            success: false,
           };
         }
         commit = readFileSync(refFile).toString().trim();
@@ -100,11 +100,11 @@ export const ${variable} = ${json};
     ctx.logger.info(generalError);
     ctx.logger.error(JSON.stringify(error, null, 2));
     return {
-      success: false
+      success: false,
     };
   }
   ctx.logger.info(`✔️  Version information file successfully created in ${targetFile}`);
   return {
-    success: true
+    success: true,
   };
 });
