@@ -6,14 +6,14 @@
 [![npm version](https://badge.fury.io/js/ngx-devkit-builders.svg)](https://badge.fury.io/js/ngx-devkit-builders)
 [![Package License](https://img.shields.io/npm/l/ngx-devkit-builders.svg)](https://www.npmjs.com/ngx-devkit-builders)
 [![NPM Downloads](https://img.shields.io/npm/dm/ngx-devkit-builders.svg)](https://www.npmjs.com/ngx-devkit-builders)
-[![Build & Publish](https://github.com/celtian/ngx-devkit-builders/workflows/Build%20&%20Publish/badge.svg)](https://github.com/celtian/ngx-devkit-builders/actions)
+[![Snyk](https://snyk.io/advisor/npm-package/ngx-devkit-builders/badge.svg)](https://snyk.io/advisor/npm-package/ngx-devkit-builders)
 [![stars](https://badgen.net/github/stars/celtian/ngx-devkit-builders)](https://github.com/celtian/ngx-devkit-builders/)
 [![forks](https://badgen.net/github/forks/celtian/ngx-devkit-builders)](https://github.com/celtian/ngx-devkit-builders/)
 [![HitCount](http://hits.dwyl.com/celtian/ngx-devkit-builders.svg)](http://hits.dwyl.com/celtian/ngx-devkit-builders)
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 15 compatible_
+> ✓ _Angular 16 compatible_
 
 ## Builders
 
