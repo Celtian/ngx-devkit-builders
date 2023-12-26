@@ -31,9 +31,3 @@ runs:
         yarn install --frozen-lockfile
         echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
-
-    - name: Postinstall
-      if: steps.cache.outputs.cache-hit == 'true' && inputs.caching == 'true'
-      id: postinstall
-      run: yarn postinstall
-      shell: bash
