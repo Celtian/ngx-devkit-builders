@@ -56,6 +56,13 @@ _More builders can be added in the future._
 ng run your-project-name:version
 ```
 
+## Compatibility
+
+| Angular | ngx-app-version | Install                      |
+| ------- | --------------- | ---------------------------- |
+| >= 17   | 1.x             | `yarn add ngx-app-version`   |
+| >= 16   | 0.x             | `yarn add ngx-app-version@0` |
+
 ## License
 
 Copyright &copy; 2022 - 2023 [Dominik Hladik](https://github.com/Celtian)
