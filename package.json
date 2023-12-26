@@ -15,8 +15,8 @@
     "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist && copyfiles ./package.json ./builders.json ./README.md ./LICENSE ./dist && yarn prepare-dist",
     "build:watch": "tsc-watch --onSuccess 'yarn postbuild'",
     "publish:npmjs": "yarn build && npm publish --folder dist",
-    "prepare-dist": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/prepare-dist",
-    "gpr:setup": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/gpr-setup",
+    "prepare-dist": "yarn tsx ./scripts/prepare-dist.ts",
+    "gpr:setup": "yarn tsx ./scripts/gpr-setup.ts",
     "prepare": "husky install",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "preinstall": "npx only-allow yarn",
@@ -46,6 +46,7 @@
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
     "tsc-watch": "^6.0.4",
+    "tsx": "^4.7.0",
     "typescript": "5.2.2"
   },
   "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",

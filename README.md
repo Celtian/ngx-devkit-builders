@@ -13,7 +13,7 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 16 compatible_
+> ✓ _Angular 17 compatible_
 
 ## Builders
 
