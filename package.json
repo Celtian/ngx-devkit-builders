@@ -15,8 +15,8 @@
     "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist && copyfiles ./package.json ./builders.json ./README.md ./LICENSE ./dist && yarn prepare-dist",
     "build:watch": "tsc-watch --onSuccess 'yarn postbuild'",
     "publish:npmjs": "yarn build && npm publish --folder dist",
-    "prepare-dist": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/prepare-dist",
-    "gpr:setup": "yarn ts-node --project scripts/tsconfig.ts-node.json scripts/gpr-setup",
+    "prepare-dist": "yarn tsx ./scripts/prepare-dist.ts",
+    "gpr:setup": "yarn tsx ./scripts/gpr-setup.ts",
     "prepare": "husky install",
     "version": "auto-changelog -p && git add CHANGELOG.md",
     "preinstall": "npx only-allow yarn",
@@ -29,24 +29,25 @@
     "fix-vulnerabilities": "npx yarn-audit-fix && npx browserslist --update-db"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1602.0",
-    "@angular-devkit/core": "^16.2.0"
+    "@angular-devkit/architect": "^0.1700.8",
+    "@angular-devkit/core": "^17.0.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@types/node": "^18.17.5",
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
     "auto-changelog": "^2.4.0",
     "copyfiles": "^2.4.1",
-    "eslint": "^8.47.0",
+    "eslint": "^8.56.0",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.0",
-    "prettier": "^3.0.1",
-    "rimraf": "^5.0.1",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
     "tsc-watch": "^6.0.4",
-    "typescript": "^5.1.6"
+    "tsx": "^4.7.0",
+    "typescript": "5.2.2"
   },
   "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",
   "repository": {
@@ -63,7 +64,7 @@
     "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
-    "node": ">=18 <20"
+    "node": ">=20 <22"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

@@ -13,7 +13,7 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 16 compatible_
+> ✓ _Angular 17 compatible_
 
 ## Builders
 
@@ -55,6 +55,13 @@ _More builders can be added in the future._
 ```
 ng run your-project-name:version
 ```
+
+## Compatibility
+
+| Angular | ngx-app-version | Install                      |
+| ------- | --------------- | ---------------------------- |
+| >= 17   | 1.x             | `yarn add ngx-app-version`   |
+| >= 16   | 0.x             | `yarn add ngx-app-version@0` |
 
 ## License
 
