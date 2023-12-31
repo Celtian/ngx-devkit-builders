@@ -91,7 +91,7 @@ export default createBuilder(({ outputFile, fields, lint, variable, verbose }: V
 export const ${variable} = ${json};
 /* ${lint === 'tslint' ? 'tslint:enable' : 'eslint-enable'} */
 `,
-        { encoding }
+        { encoding },
       );
     } else {
       writeFileSync(fileToPatch, json, { encoding });

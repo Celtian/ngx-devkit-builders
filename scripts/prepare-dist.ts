@@ -6,8 +6,10 @@ import packageJson from '../dist/package.json';
 // Modify builders.json in dist folder
 const builders: Record<string, any> = buildersJson;
 
-builders.builders.version.implementation = './version';
-builders.builders.version.schema = './version/schema.json';
+for (const module of ['robots', 'version']) {
+  builders.builders[module].implementation = `./${module}`;
+  builders.builders[module].schema = `./${module}/schema.json`;
+}
 
 writeFileSync(join(__dirname, '..', 'dist', 'builders.json'), JSON.stringify(builders, null, 2));
 console.log('File builders.json modified:', builders);
@@ -20,7 +22,7 @@ pkg.devDependencies = {};
 pkg.engines.node = '>=12';
 pkg.peerDependencies = {
   '@angular/core': '>=12',
-  '@angular/cli': '>=12'
+  '@angular/cli': '>=12',
 };
 
 writeFileSync(join(__dirname, '..', 'dist', 'package.json'), JSON.stringify(pkg, null, 2));

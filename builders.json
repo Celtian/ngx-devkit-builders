@@ -1,5 +1,10 @@
 {
   "builders": {
+    "robots": {
+      "description": "Create simplified robots file",
+      "implementation": "./dist/robots",
+      "schema": "./dist/robots/schema.json"
+    },
     "version": {
       "description": "Create build information file",
       "implementation": "./dist/version",
