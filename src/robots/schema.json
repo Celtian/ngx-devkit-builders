@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "allow": {
+      "description": "Allow or disallow",
+      "type": "boolean",
+      "default": false
+    },
+    "sitemap": {
+      "description": "Sitemap.xml url",
+      "type": "string",
+      "default": ""
+    },
+    "verbose": {
+      "description": "Extended logging output",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

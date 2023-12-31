@@ -30,7 +30,7 @@
     "verbose": {
       "description": "Extended logging output",
       "type": "boolean",
-      "default": "false"
+      "default": false
     }
   }
 }
