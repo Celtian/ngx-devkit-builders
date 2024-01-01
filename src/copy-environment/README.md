@@ -1,4 +1,4 @@
-# Robots
+# Copy environment
 
 It creates simplified robots.txt.
 
