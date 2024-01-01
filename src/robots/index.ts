@@ -24,13 +24,20 @@ const createRobots = (options: Pick<RobotsBuilderOptions, 'allow' | 'sitemap'>) 
 export default createBuilder(async ({ allow, sitemap, verbose }: RobotsBuilderOptions, ctx) => {
   ctx.logger.info('🚧 Creating robots file…');
 
-  const rootPath = getSystemPath(normalize(ctx.workspaceRoot));
+  const projectMetadata = await ctx.getProjectMetadata(ctx.target.project);
+
+  if (projectMetadata.projectType !== 'application') {
+    ctx.logger.error('❌ Project must be type of application');
+    return {
+      success: false,
+    };
+  }
 
   if (ctx.target.configuration) {
     ctx.logger.info(`Selected configuration "${ctx.target.configuration}"`);
   }
 
-  const projectMetadata = await ctx.getProjectMetadata(ctx.target.project);
+  const rootPath = getSystemPath(normalize(ctx.workspaceRoot));
 
   const targetFile = `${rootPath}/${projectMetadata.sourceRoot}/robots.txt`;
 

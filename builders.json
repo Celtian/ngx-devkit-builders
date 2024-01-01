@@ -1,5 +1,10 @@
 {
   "builders": {
+    "copy-environment": {
+      "description": "Copy environment file",
+      "implementation": "./dist/copy-environment",
+      "schema": "./dist/copy-environment/schema.json"
+    },
     "robots": {
       "description": "Create simplified robots file",
       "implementation": "./dist/robots",

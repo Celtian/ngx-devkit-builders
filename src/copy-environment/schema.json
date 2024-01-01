@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "source": {
+      "description": "Relative path to source file",
+      "type": "string"
+    },
+    "target": {
+      "description": "Relative path to target file",
+      "type": "string"
+    },
+    "overwrite": {
+      "description": "Overwrite target",
+      "type": "boolean",
+      "default": false
+    },
+    "verbose": {
+      "description": "Extended logging output",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
