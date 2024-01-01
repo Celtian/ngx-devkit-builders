@@ -21,7 +21,7 @@ This package contains Architect builders used to build and test Angular applicat
 | ---------------------------------------------------- | --------------------------------- |
 | [version](./src/version/README.md)                   | Create build information file     |
 | [robots](./src/robots/README.md)                     | Create simplified robots.txt file |
-| [copy-environment](./src/copy-environment/README.md) | Copy environemnt file             |
+| [copy-environment](./src/copy-environment/README.md) | Copy environment file             |
 
 _More builders can be added in the future._
 
