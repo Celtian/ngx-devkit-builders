@@ -6,7 +6,7 @@ import packageJson from '../dist/package.json';
 // Modify builders.json in dist folder
 const builders: Record<string, any> = buildersJson;
 
-for (const module of ['robots', 'version']) {
+for (const module of ['robots', 'version', 'copy-environment']) {
   builders.builders[module].implementation = `./${module}`;
   builders.builders[module].schema = `./${module}/schema.json`;
 }
