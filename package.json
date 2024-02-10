@@ -19,7 +19,6 @@
     "gpr:setup": "yarn tsx ./scripts/gpr-setup.ts",
     "prepare": "husky install",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "preinstall": "npx only-allow yarn",
     "postversion": "git push && git push --follow-tags",
     "publish:beta": "yarn && yarn build && npm publish --folder dist --tag beta",
     "release:beta": "npm version prerelease -m \"chore(update): prelease %s β\"",
@@ -66,7 +65,8 @@
     "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
-    "node": ">=20 <22"
+    "node": ">=20 <22",
+    "npm": "please-use-yarn"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
