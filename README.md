@@ -13,9 +13,9 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 17 compatible_
+> ✓ _Angular 18 compatible_
 
-## Builders
+## 🚀 Builders
 
 | Name                                                 | Description                       |
 | ---------------------------------------------------- | --------------------------------- |
@@ -25,14 +25,14 @@ This package contains Architect builders used to build and test Angular applicat
 
 _More builders can be added in the future._
 
-## Compatibility
+## 🔧 Compatibility
 
 | Angular | ngx-app-version | Install                      |
 | ------- | --------------- | ---------------------------- |
 | >= 17   | 1.x             | `yarn add ngx-app-version`   |
 | >= 16   | 0.x             | `yarn add ngx-app-version@0` |
 
-## License
+## 🪪 License
 
 Copyright &copy; 2022 - 2024 [Dominik Hladik](https://github.com/Celtian)
 
