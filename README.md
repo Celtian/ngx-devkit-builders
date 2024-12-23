@@ -27,10 +27,10 @@ _More builders can be added in the future._
 
 ## 🔧 Compatibility
 
-| Angular | ngx-app-version | Install                      |
-| ------- | --------------- | ---------------------------- |
-| >= 17   | 1.x             | `yarn add ngx-app-version`   |
-| >= 16   | 0.x             | `yarn add ngx-app-version@0` |
+| Angular | ngx-devkit-builders | Install                          |
+| ------- | ------------------- | -------------------------------- |
+| >= 17   | 1.x                 | `yarn add ngx-devkit-builders`   |
+| >= 16   | 0.x                 | `yarn add ngx-devkit-builders@0` |
 
 ## 🪪 License
 
