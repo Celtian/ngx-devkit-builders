@@ -65,7 +65,7 @@
     "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
-    "node": ">=22 <24",
+    "node": ">=24 <26",
     "npm": "please-use-yarn"
   },
   "publishConfig": {
