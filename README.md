@@ -34,7 +34,7 @@ _More builders can be added in the future._
 
 ## 🪪 License
 
-Copyright &copy; 2022 - 2024 [Dominik Hladik](https://github.com/Celtian)
+Copyright &copy; 2022 - 2026 [Dominik Hladik](https://github.com/Celtian)
 
 All contents are licensed under the [MIT license].
 
