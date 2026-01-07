@@ -14,6 +14,7 @@
     "build": "rimraf dist && tsc",
     "postbuild": "copyfiles --up 1 ./src/**/*.json ./dist && copyfiles ./package.json ./builders.json ./README.md ./LICENSE ./dist && yarn script:prepare-dist",
     "build:watch": "tsc-watch --onSuccess 'yarn postbuild'",
+    "lint": "eslint 'src/**/*.ts' --format stylish",
     "publish:npmjs": "yarn build && npm publish --folder dist",
     "script:gpr-setup": "yarn tsx scripts/gpr-setup.ts",
     "script:prepare-dist": "yarn tsx scripts/prepare-dist.ts",
