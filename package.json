@@ -30,11 +30,13 @@
   "dependencies": {
     "@angular-devkit/architect": "^0.2100.4",
     "@angular-devkit/core": "^21.0.4",
+    "@schematics/angular": "^21.0.4",
     "fs-extra": "^11.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
+    "@eslint/js": "^9.39.2",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^8.52.0",
@@ -48,7 +50,8 @@
     "rimraf": "^6.1.2",
     "tsc-watch": "^7.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
   },
   "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",
   "repository": {

@@ -2,20 +2,20 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
-    "allow": {
-      "description": "Allow or disallow",
+    "dryRun": {
+      "description": "Run the builder without making any changes to files",
       "type": "boolean",
       "default": false
-    },
-    "sitemap": {
-      "description": "Sitemap.xml url",
-      "type": "string",
-      "default": ""
     },
     "verbose": {
       "description": "Extended logging output",
       "type": "boolean",
       "default": false
+    },
+    "includeDirectives": {
+      "description": "Include Angular directives in addition to components",
+      "type": "boolean",
+      "default": true
     }
   }
 }

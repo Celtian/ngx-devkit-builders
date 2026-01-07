@@ -13,7 +13,7 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 18 compatible_
+> ✓ _Angular 21 compatible_
 
 ## 🚀 Builders
 
@@ -22,6 +22,7 @@ This package contains Architect builders used to build and test Angular applicat
 | [version](./src/version/README.md)                   | Create build information file     |
 | [robots](./src/robots/README.md)                     | Create simplified robots.txt file |
 | [copy-environment](./src/copy-environment/README.md) | Copy environment file             |
+| [sort-imports](./src/sort-imports/README.md)         | Sort imports of components        |
 
 _More builders can be added in the future._
 
@@ -29,7 +30,8 @@ _More builders can be added in the future._
 
 | Angular | ngx-devkit-builders | Install                          |
 | ------- | ------------------- | -------------------------------- |
-| >= 17   | 1.x                 | `yarn add ngx-devkit-builders`   |
+| >= 21   | 2.x                 | `yarn add ngx-devkit-builders`   |
+| >= 17   | 1.x                 | `yarn add ngx-devkit-builders@1` |
 | >= 16   | 0.x                 | `yarn add ngx-devkit-builders@0` |
 
 ## 🪪 License

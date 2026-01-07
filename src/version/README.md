@@ -1,8 +1,8 @@
-# Version
+# 🔢 Version
 
-It creates file that contains information about version.
+It creates file that contains information about version. 🚀
 
-## Output
+## 📋 Example Output
 
 ```typescript
 // IMPORTANT: THIS FILE IS AUTO GENERATED!
@@ -19,35 +19,46 @@ export const VERSION = {
 /* eslint-enable */
 ```
 
-## Quick start
+## 🚀 Quick Start
 
-1. Go to angular.json
+### 📝 Add to angular.json
 
 ```json
 {
   ...,
   "projects": {
-    "your-project-name": { // project will be different
+    "your-project-name": {
       ...,
       "architect": {
         ...,
-        "version": { // name can be different if you want
+        "version": {
           "builder": "ngx-devkit-builders:version",
-          "options": { // not needed
-            "outputFile": "src/environments/version.ts", // or src/assets/version.json
-            "fields": ["version", "date", "author", "git"], // or custom selection
-            "lint": "eslint", // or "tslint"
-            "variable": "VERSION", // or whatever you want
-            "verbose": false // or true
+          "options": {
+            "outputFile": "src/environments/version.ts",
+            "fields": ["version", "date", "author", "git"],
+            "lint": "eslint",
+            "variable": "VERSION",
+            "verbose": false
           }
         }
       }
+    }
   }
 }
 ```
 
-2. Run command
+### ▶️ Run the builder
 
 ```bash
 ng run your-project-name:version
 ```
+
+## ⚙️ Options
+
+| Option       | Type       | Default                                | Description                              |
+| ------------ | ---------- | -------------------------------------- | ---------------------------------------- |
+| `outputFile` | `string`   | `src/environments/version.ts`          | Output file path (supports .ts or .json) |
+| `fields`     | `string[]` | `["version", "date", "author", "git"]` | Fields to include in version file        |
+| `lint`       | `string`   | `eslint`                               | Linter to use (eslint or tslint)         |
+| `variable`   | `string`   | `VERSION`                              | Variable name for TypeScript output      |
+| `verbose`    | `boolean`  | `false`                                | Show detailed output                     |
