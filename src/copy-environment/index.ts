@@ -9,23 +9,8 @@ export interface CopyEnvironmentBuilderOptions extends JsonObject {
   verbose: boolean;
 }
 
-interface CopyFileOptions {
-  sourceFile: string;
-  targetFile: string;
-  overwrite: boolean;
-}
-
-async function copyFiles({ sourceFile, targetFile, overwrite }: CopyFileOptions) {
-  return new Promise<void>((resolve, reject) => {
-    copy(sourceFile, targetFile, { overwrite }, () => {
-      reject();
-    });
-    resolve();
-  });
-}
-
 export default createBuilder(async ({ verbose, source, target, overwrite }: CopyEnvironmentBuilderOptions, ctx) => {
-  ctx.logger.info('🚧 Creating robots file…');
+  ctx.logger.info('🚧 Copying environment…');
 
   const projectMetadata = await ctx.getProjectMetadata(ctx.target.project);
 
@@ -50,11 +35,7 @@ export default createBuilder(async ({ verbose, source, target, overwrite }: Copy
   const targetFile = `${environmentsFolder}/${target}`;
 
   try {
-    await copyFiles({
-      sourceFile,
-      targetFile,
-      overwrite,
-    });
+    await copy(sourceFile, targetFile, { overwrite });
     if (overwrite) {
       ctx.logger.info(`✔️  Environment replaced in "${targetFile}"`);
     } else {

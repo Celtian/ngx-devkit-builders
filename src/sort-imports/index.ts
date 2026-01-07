@@ -1,4 +1,4 @@
-import { createBuilder } from '@angular-devkit/architect';
+import { BuilderContext, createBuilder } from '@angular-devkit/architect';
 import { JsonObject } from '@angular-devkit/core';
 import { getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
@@ -18,21 +18,6 @@ interface ComponentImportsInfo {
   hasChanges: boolean;
   sortedImports: string[];
 }
-
-// ANSI color codes for terminal output
-const colors = {
-  reset: '\x1b[0m',
-  bright: '\x1b[1m',
-  dim: '\x1b[2m',
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  magenta: '\x1b[35m',
-  cyan: '\x1b[36m',
-  white: '\x1b[37m',
-  gray: '\x1b[90m',
-};
 
 const walkDirectory = (dir: string, files: string[] = []): string[] => {
   const items = readdirSync(dir, { withFileTypes: true });
@@ -190,46 +175,46 @@ const updateComponentImports = (content: string, sortedImports: string[]): strin
   return updatedContent;
 };
 
-const outputResults = (analyses: ComponentImportsInfo[], options: SortImportsBuilderOptions): void => {
+const outputResults = (
+  analyses: ComponentImportsInfo[],
+  options: SortImportsBuilderOptions,
+  context: BuilderContext,
+): void => {
   const changedFiles = analyses.filter((a) => a.hasChanges);
   const unchangedFiles = analyses.filter((a) => !a.hasChanges);
 
-  console.log('\n📋 COMPONENT IMPORTS SORTING ANALYSIS');
-  console.log('━'.repeat(80));
+  context.logger.info('\n📋 COMPONENT IMPORTS SORTING ANALYSIS');
+  context.logger.info('━'.repeat(80));
 
   if (options.dryRun) {
-    console.log('🔍 DRY RUN MODE - No files were modified');
-    console.log('');
+    context.logger.info('🔍 DRY RUN MODE - No files were modified');
   }
 
-  console.log(`📊 Summary: ${analyses.length} files analyzed`);
-  console.log(`✅ ${unchangedFiles.length} files already have sorted imports`);
-  console.log(`🔄 ${changedFiles.length} files ${options.dryRun ? 'would be' : 'were'} updated`);
+  context.logger.info(`📊 Summary: ${analyses.length} files analyzed`);
+  context.logger.info(`✅ ${unchangedFiles.length} files already have sorted imports`);
+  context.logger.info(`🔄 ${changedFiles.length} files ${options.dryRun ? 'would be' : 'were'} updated`);
 
   if (options.verbose && changedFiles.length > 0) {
-    console.log('');
-    console.log(`📝 Files ${options.dryRun ? 'that would be' : 'that were'} updated:`);
-    console.log('─'.repeat(80));
-    console.log('Component Name'.padEnd(35) + 'Sorted Imports');
-    console.log('─'.repeat(80));
+    context.logger.info(`📝 Files ${options.dryRun ? 'that would be' : 'that were'} updated:`);
+    context.logger.info('─'.repeat(80));
+    context.logger.info('Component Name'.padEnd(35) + 'Sorted Imports');
+    context.logger.info('─'.repeat(80));
 
     changedFiles.forEach((analysis) => {
       const componentName =
         analysis.componentName.length > 32 ? analysis.componentName.substring(0, 29) + '...' : analysis.componentName;
       const sortedImports = `[${analysis.sortedImports.join(', ')}]`;
 
-      // Use cyan color for sorted imports to match the existing imports color
-      console.log(componentName.padEnd(35) + colors.cyan + sortedImports + colors.reset);
+      context.logger.info(componentName.padEnd(35) + sortedImports);
     });
-    console.log('─'.repeat(80));
+    context.logger.info('─'.repeat(80));
   }
 
   if (options.verbose && unchangedFiles.length > 0) {
-    console.log('');
-    console.log('✨ Files with already sorted imports:');
-    console.log('─'.repeat(80));
-    console.log('Component Name'.padEnd(35) + 'Current Imports');
-    console.log('─'.repeat(80));
+    context.logger.info('✨ Files with already sorted imports:');
+    context.logger.info('─'.repeat(80));
+    context.logger.info('Component Name'.padEnd(35) + 'Current Imports');
+    context.logger.info('─'.repeat(80));
 
     unchangedFiles.forEach((analysis) => {
       const componentName =
@@ -237,68 +222,62 @@ const outputResults = (analyses: ComponentImportsInfo[], options: SortImportsBui
 
       if (analysis.importsArray.length > 0) {
         const imports = `[${analysis.importsArray.join(', ')}]`;
-        // Use cyan color for components with existing sorted imports
-        console.log(componentName.padEnd(35) + colors.cyan + imports + colors.reset);
+        context.logger.info(componentName.padEnd(35) + imports);
       } else {
-        // Use gray/dim color for components without imports
         const noImportsText = 'No imports array found';
-        console.log(componentName.padEnd(35) + colors.gray + colors.dim + noImportsText + colors.reset);
+        context.logger.info(componentName.padEnd(35) + noImportsText);
       }
     });
-    console.log('─'.repeat(80));
+    context.logger.info('─'.repeat(80));
   }
 
-  console.log('━'.repeat(80));
+  context.logger.info('━'.repeat(80));
 };
 
-export default createBuilder((options: SortImportsBuilderOptions, context) => {
-  return new Promise<{ success: boolean }>((resolve) => {
-    try {
-      const projectRoot = context.target?.project
-        ? join(context.workspaceRoot, 'projects', context.target.project)
-        : context.workspaceRoot;
+export default createBuilder(async (options: SortImportsBuilderOptions, context: BuilderContext) => {
+  try {
+    const projectRoot = context.target?.project
+      ? join(context.workspaceRoot, 'projects', context.target.project)
+      : context.workspaceRoot;
 
-      const srcDir = join(projectRoot, 'src');
+    const srcDir = join(projectRoot, 'src');
 
-      if (!statSync(srcDir).isDirectory()) {
-        context.logger.error(`Source directory not found: ${srcDir}`);
-        resolve({ success: false });
-        return;
-      }
-
-      // Find all TypeScript files recursively
-      const allTsFiles = walkDirectory(srcDir);
-
-      // Filter to only component and directive files
-      const targetFiles = allTsFiles.filter((file) => isAngularComponentOrDirective(file, options.includeDirectives));
-
-      if (targetFiles.length === 0) {
-        console.log('No Angular components or directives found.');
-        resolve({ success: true });
-        return;
-      }
-
-      // Process each file
-      const analyses: ComponentImportsInfo[] = [];
-
-      for (const filePath of targetFiles) {
-        try {
-          const analysis = processFile(filePath, options);
-          analyses.push(analysis);
-        } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-          context.logger.warn(`Failed to process ${filePath}: ${errorMessage}`);
-        }
-      }
-
-      // Output results
-      outputResults(analyses, options);
-
-      resolve({ success: true });
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      context.logger.error('Error sorting imports: ' + errorMessage);
-      resolve({ success: false });
+    if (!statSync(srcDir).isDirectory()) {
+      context.logger.error(`Source directory not found: ${srcDir}`);
+      return { success: false };
     }
-  });
+
+    // Find all TypeScript files recursively
+    const allTsFiles = walkDirectory(srcDir);
+
+    // Filter to only component and directive files
+    const targetFiles = allTsFiles.filter((file) => isAngularComponentOrDirective(file, options.includeDirectives));
+
+    if (targetFiles.length === 0) {
+      context.logger.info('No Angular components or directives found.');
+      return { success: true };
+    }
+
+    // Process each file
+    const analyses: ComponentImportsInfo[] = [];
+
+    for (const filePath of targetFiles) {
+      try {
+        const analysis = processFile(filePath, options);
+        analyses.push(analysis);
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        context.logger.warn(`Failed to process ${filePath}: ${errorMessage}`);
+      }
+    }
+
+    // Output results
+    outputResults(analyses, options, context);
+
+    return { success: true };
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    context.logger.error('Error sorting imports: ' + errorMessage);
+    return { success: false };
+  }
 });
