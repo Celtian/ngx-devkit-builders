@@ -28,15 +28,15 @@
     "fix-vulnerabilities": "npx yarn-audit-fix && npx browserslist --update-db"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.1802.9",
-    "@angular-devkit/core": "^18.2.9",
+    "@angular-devkit/architect": "^0.2100.4",
+    "@angular-devkit/core": "^21.0.4",
     "fs-extra": "^11.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.10.2",
+    "@types/node": "^24.1.0",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.10.0",
     "auto-changelog": "^2.5.0",
@@ -46,9 +46,9 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "rimraf": "^6.1.2",
-    "tsc-watch": "^6.2.1",
+    "tsc-watch": "^7.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.9.3"
   },
   "homepage": "https://github.com/Celtian/ngx-devkit-builders#readme",
   "repository": {
@@ -65,7 +65,7 @@
     "url": "https://github.com/Celtian/ngx-devkit-builders/issues"
   },
   "engines": {
-    "node": ">=22 <24",
+    "node": ">=24 <26",
     "npm": "please-use-yarn"
   },
   "publishConfig": {
