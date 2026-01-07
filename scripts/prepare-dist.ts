@@ -19,10 +19,10 @@ const pkg: Record<string, any> = packageJson;
 
 pkg.scripts = {};
 pkg.devDependencies = {};
-pkg.engines.node = '>=12';
+pkg.engines.node = '>=20';
 pkg.peerDependencies = {
-  '@angular/core': '>=12',
-  '@angular/cli': '>=12',
+  '@angular/core': '>=21',
+  '@angular/cli': '>=21',
 };
 
 writeFileSync(join(__dirname, '..', 'dist', 'package.json'), JSON.stringify(pkg, null, 2));

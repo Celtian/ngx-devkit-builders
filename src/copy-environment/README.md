@@ -1,40 +1,50 @@
-# Copy environment
+# 📄 Copy Environment
 
-It creates simplified robots.txt.
+It copies environment files for your Angular project. 🚀
 
-## Example output
+## 📋 Example Output
 
 Copied file from `projects/your-project-name/src/environments/environment.sample.ts` into
-`projects/your-project-name/src/environments/environment.ts`.
+`projects/your-project-name/src/environments/environment.ts`. ✅
 
-## Quick start
+## 🚀 Quick Start
 
-1. Go to angular.json
+### 📝 Add to angular.json
 
 ```json
 {
   ...,
   "projects": {
-    "your-project-name": { // project will be different
+    "your-project-name": {
       ...,
       "architect": {
         ...,
-        "copy-environment": { // name can be different if you want
+        "copy-environment": {
           "builder": "ngx-devkit-builders:copy-environment",
           "options": {
             "source": "environment.sample.ts",
             "target": "environment.ts",
-            "overwrite": false, // or true
-            "verbose": false // or true
+            "overwrite": false,
+            "verbose": false
           }
         }
       }
+    }
   }
 }
 ```
 
-2. Run command
+### ▶️ Run the builder
 
 ```bash
 ng run your-project-name:copy-environment
 ```
+
+## ⚙️ Options
+
+| Option      | Type      | Default | Description                               |
+| ----------- | --------- | ------- | ----------------------------------------- |
+| `source`    | `string`  | -       | Source environment file name              |
+| `target`    | `string`  | -       | Target environment file name              |
+| `overwrite` | `boolean` | `false` | Whether to overwrite existing target file |
+| `verbose`   | `boolean` | `false` | Show detailed output                      |
