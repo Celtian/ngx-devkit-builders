@@ -5,6 +5,9 @@ jobs:
   install-and-test:
     name: 🛠️ Install & Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: 🗜️ Checkout
@@ -26,3 +29,14 @@ jobs:
 
       - name: 📦 Build
         run: bun run build
+
+      - name: 🧪 Run tests
+        run: bun run test --coverage
+
+      - name: 🧪 Create coverage report
+        if: ${{ always() && github.event.pull_request.head.repo.full_name == github.repository && hashFiles('coverage/coverage-summary.json') != '' }}
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          vite-config-path: ./vitest.config.ts
+          json-summary-path: ./coverage/coverage-summary.json
+          json-final-path: ./coverage/coverage-final.json

@@ -11,7 +11,7 @@ module.exports = tseslint.config(
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: './tsconfig.json',
+        project: './tsconfig.eslint.json',
       },
     },
     rules: {
