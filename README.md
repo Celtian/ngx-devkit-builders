@@ -30,7 +30,7 @@ _More builders can be added in the future._
 
 | Angular | ngx-devkit-builders | Install                          |
 | ------- | ------------------- | -------------------------------- |
-| >= 22   | 2.x                 | `bun add ngx-devkit-builders`    |
+| >= 22   | 3.x                 | `bun add ngx-devkit-builders`    |
 | >= 21   | 2.x                 | `yarn add ngx-devkit-builders@2` |
 | >= 17   | 1.x                 | `bun add ngx-devkit-builders@1`  |
 | >= 16   | 0.x                 | `bun add ngx-devkit-builders@0`  |

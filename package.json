@@ -75,5 +75,12 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "auto-changelog": {
+    "remote": "none",
+    "commitUrl": "https://github.com/Celtian/ngx-devkit-builders/commit/{id}",
+    "issueUrl": "https://github.com/Celtian/ngx-devkit-builders/issues/{id}",
+    "mergeUrl": "https://github.com/Celtian/ngx-devkit-builders/pull/{id}",
+    "compareUrl": "https://github.com/Celtian/ngx-devkit-builders/compare/{from}...{to}"
   }
 }
