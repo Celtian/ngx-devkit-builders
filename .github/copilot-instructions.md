@@ -15,10 +15,10 @@ This is an Angular Architect builder library that provides custom build-time too
 
 ### Build & Distribution
 
-- Source in `src/`, compiled to `dist/` via TypeScript (`yarn build`)
+- Source in `src/`, compiled to `dist/` via TypeScript (`bun run build`)
 - Post-build: [scripts/prepare-dist.ts](scripts/prepare-dist.ts) modifies `dist/builders.json` to fix paths and `dist/package.json` to remove dev dependencies
 - The `builders.json` at root maps builder names to their `dist/` implementations
-- Use `yarn build:watch` for development with auto-rebuild
+- Use `bun run build:watch` for development with auto-rebuild
 
 ### Key Patterns
 
@@ -32,24 +32,24 @@ This is an Angular Architect builder library that provides custom build-time too
 ### Building
 
 ```bash
-yarn build          # Clean build: rimraf dist && tsc && postbuild
-yarn build:watch    # Watch mode with auto-postbuild
-yarn postbuild      # Copy JSON schemas, READMEs, and run prepare-dist script
+bun run build          # Clean build: rimraf dist && tsc && postbuild
+bun run build:watch    # Watch mode with auto-postbuild
+bun run postbuild      # Copy JSON schemas, READMEs, and run prepare-dist script
 ```
 
 ### Publishing
 
 ```bash
-yarn publish:npmjs  # Build and publish to npm
-yarn release:patch  # Bump patch version, update CHANGELOG, commit, and push tag
-yarn release:minor  # Minor version bump
-yarn release:beta   # Prerelease version
+bun run publish:npmjs  # Build and publish to npm
+bun run release:patch  # Bump patch version, update CHANGELOG, commit, and push tag
+bun run release:minor  # Minor version bump
+bun run release:beta   # Prerelease version
 ```
 
 ### Code Quality
 
 - Husky + lint-staged configured for pre-commit hooks
-- Commitlint enforces conventional commits
+- Quick Commitlint enforces conventional commits
 - Prettier for formatting, ESLint for linting (TypeScript 5.x)
 
 ## Builder Implementation Guidelines
@@ -78,7 +78,7 @@ yarn release:beta   # Prerelease version
 
 ## Project-Specific Conventions
 
-- **Yarn-only**: Package manager is strictly Yarn (enforced via `engines.npm: "please-use-yarn"`)
+- **Bun-only**: Package manager is Bun 1.3.14 (declared via `packageManager` and `engines.bun`)
 - **Builder paths in dist**: Post-build script rewrites paths from `./dist/version` to `./version` for distribution
 - **Error handling**: Always catch errors, log with ❌ emoji, and return `{ success: false }`
 - **Configuration-aware**: Builders should respect `ctx.target.configuration` when applicable (see copy-environment)

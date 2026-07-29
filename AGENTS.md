@@ -4,9 +4,9 @@ These instructions apply to the entire repository.
 
 ## Project overview
 
-`ngx-devkit-builders` is a Yarn-managed TypeScript package containing Angular Architect builders. The supported builders are `copy-environment`, `robots`, `sort-imports`, and `version`.
+`ngx-devkit-builders` is a Bun-managed TypeScript package containing Angular Architect builders. The supported builders are `copy-environment`, `robots`, `sort-imports`, and `version`.
 
-The repository requires Node.js 24 or 25 for development. Use Yarn for dependency management and project scripts; do not replace `yarn.lock` with an npm lockfile.
+The repository requires Node.js 24 or 25 and Bun 1.3.14 for development. Use Bun for dependency management and project scripts. Run TypeScript utility scripts directly with Bun instead of `tsx`; do not replace `bun.lock` with an npm lockfile.
 
 ## Repository layout
 
@@ -36,10 +36,10 @@ When adding a builder, create its `index.ts`, `schema.json`, and `README.md`, re
 Run the checks relevant to the files changed:
 
 ```bash
-yarn lint
-yarn build
+bun run lint
+bun run build
 ```
 
-There is currently no automated test script. `yarn build` compiles `src/` and invokes the `postbuild` lifecycle to assemble and prepare `dist/`.
+There is currently no automated test script. `bun run build` compiles `src/` and invokes the `postbuild` lifecycle to assemble and prepare `dist/`.
 
 Do not run release, version-bump, publish, or push scripts unless the user explicitly requests them.
