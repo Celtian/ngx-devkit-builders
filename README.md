@@ -13,7 +13,7 @@
 
 This package contains Architect builders used to build and test Angular applications and libraries.
 
-> ✓ _Angular 21 compatible_
+> ✓ _Angular 22 compatible_
 
 ## 🚀 Builders
 
@@ -30,9 +30,10 @@ _More builders can be added in the future._
 
 | Angular | ngx-devkit-builders | Install                          |
 | ------- | ------------------- | -------------------------------- |
-| >= 21   | 2.x                 | `yarn add ngx-devkit-builders`   |
-| >= 17   | 1.x                 | `yarn add ngx-devkit-builders@1` |
-| >= 16   | 0.x                 | `yarn add ngx-devkit-builders@0` |
+| >= 22   | 2.x                 | `bun add ngx-devkit-builders`    |
+| >= 21   | 2.x                 | `yarn add ngx-devkit-builders@2` |
+| >= 17   | 1.x                 | `bun add ngx-devkit-builders@1`  |
+| >= 16   | 0.x                 | `bun add ngx-devkit-builders@0`  |
 
 ## 🪪 License
 

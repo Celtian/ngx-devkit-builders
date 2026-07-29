@@ -22,7 +22,7 @@ export interface VersionBuilderOutput {
 
 export default createBuilder(({ outputFile, fields, lint, variable, verbose }: VersionBuilderOptions, ctx) => {
   ctx.logger.info('🚧 Creating version information file…');
-  let targetFile = '';
+  let targetFile: string;
   const generalError = '❌ Creating version information file failed';
 
   try {
@@ -80,7 +80,7 @@ export default createBuilder(({ outputFile, fields, lint, variable, verbose }: V
 
     const json = JSON.stringify(result, null, 2);
 
-    const rawFormat = outputFile?.split('.')?.pop();
+    const rawFormat = outputFile.split('.').pop() ?? '';
     const format = ['json', 'ts'].includes(rawFormat) ? rawFormat : 'json';
     if (verbose === true) ctx.logger.info(`Output format is: ${format}`);
     if (format === 'ts') {

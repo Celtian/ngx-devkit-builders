@@ -12,7 +12,15 @@ export interface CopyEnvironmentBuilderOptions extends JsonObject {
 export default createBuilder(async ({ verbose, source, target, overwrite }: CopyEnvironmentBuilderOptions, ctx) => {
   ctx.logger.info('🚧 Copying environment…');
 
-  const projectMetadata = await ctx.getProjectMetadata(ctx.target.project);
+  const builderTarget = ctx.target;
+  if (!builderTarget) {
+    ctx.logger.error('❌ Builder target is required');
+    return {
+      success: false,
+    };
+  }
+
+  const projectMetadata = await ctx.getProjectMetadata(builderTarget.project);
 
   if (projectMetadata.projectType !== 'application') {
     ctx.logger.error('❌ Project must be type of application');
@@ -21,8 +29,8 @@ export default createBuilder(async ({ verbose, source, target, overwrite }: Copy
     };
   }
 
-  if (ctx.target.configuration) {
-    ctx.logger.info(`Selected configuration "${ctx.target.configuration}"`);
+  if (builderTarget.configuration) {
+    ctx.logger.info(`Selected configuration "${builderTarget.configuration}"`);
   }
 
   const rootPath = getSystemPath(normalize(ctx.workspaceRoot));
